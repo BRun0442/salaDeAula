@@ -21,8 +21,7 @@ def telaInicial():
 
   quantidadeAlunos = input("Digite a quantidade de alunos que a sala possui: ")
 
-def AdicionaNomes():
-  global quantidadeAlunos
+def adicionaNomes():
   nomeAluno = []
 
   for i in reversed(range(int(quantidadeAlunos))):
@@ -30,7 +29,7 @@ def AdicionaNomes():
 
   notasAluno.insert(0, nomeAluno)
 
-def AdicionaNotas():
+def adicionaNotas():
   global quantidadeAlunos
   notaAluno = []
 
@@ -39,17 +38,85 @@ def AdicionaNotas():
 
   notasAluno.insert(len(notasAluno), notaAluno)
 
+def tabelaAlunos():
+  print('\n╔════════════════════════════════════════════════════════════════╗')
+  print("| Nome | Nota 1º trimestre | Nota 2º trimestre | Média das notas |")
+  print('╚════════════════════════════════════════════════════════════════╝')
+
+  for i in reversed(range(int(quantidadeAlunos))):
+    mediaNotaAluno = (int(notasAluno[1][i]) + int(notasAluno[2][i]))/2
+    print("| ", notasAluno[0][i], ": ", notasAluno[1][i] , " | ", notasAluno[2][i], " | ", mediaNotaAluno, " |", "\n") 
+
+def tabelaAlunosRecuperacao():
+  print("  recuperação\n\n")
+  print('\n╔══════════════╗')
+  print("| Nome | Média |")
+  
+
+  for i in reversed(range(int(quantidadeAlunos))):
+    mediaNotaAluno = (int(notasAluno[1][i]) + int(notasAluno[2][i]))/2
+
+    if mediaNotaAluno < 6:
+      print(notasAluno[0][i], "|", mediaNotaAluno, "\n") 
+      
+  print('╚══════════════╝')
+
+def adicionaNotasRecuperacao():
+  global quantidadeAlunos
+  notasRecuperacao = []
+
+  for i in range(int(quantidadeAlunos)):
     
+    mediaNotaAluno = (int(notasAluno[1][i]) + int(notasAluno[2][i]))/2
+
+    if mediaNotaAluno < 6:
+      notasRecuperacao.append(input(f"Digite a nota da prova de recuperacao de {notasAluno[0][i]}: "))
+    else:
+      notasRecuperacao.append('')  
+
+  notasAluno.insert(len(notasAluno), notasRecuperacao)
+  print(notasAluno)
+
+
+def tabelaNotaFinal():
+  print('\n╔══════════════════════════════════════════════════════════════════════════════════╗')
+  print("| Nome | Nota 1º trimestre | Nota 2º trimestre | Nota Recuperação | Média das notas |")
+  print('╚═══════════════════════════════════════════════════════════════════════════════════╝')
+
+  for i in reversed(range(int(quantidadeAlunos))):
+    if notasAluno[3][i] != '':
+      mediaNotaAluno = (int(notasAluno[1][i]) + int(notasAluno[2][i]) + int(notasAluno[3][i]))/3
+    else:
+      mediaNotaAluno = (int(notasAluno[1][i]) + int(notasAluno[2][i]))/2
+
+    print("| ", notasAluno[0][i], ": ", notasAluno[1][i] , " | ", notasAluno[2][i], " | ", notasAluno[3][i] ," | ", mediaNotaAluno, " |", "\n")
 
 def main():
   limpaTela()
+
   telaInicial()
   limpaTela()
-  AdicionaNomes()
-  limpaTela()
-  AdicionaNotas()
-  limpaTela()
-  AdicionaNotas()
-  print(notasAluno)
 
+  adicionaNomes()
+  limpaTela()
+
+  # Notas primeiro trimestre
+  adicionaNotas()
+  limpaTela()
+
+  # Notas segundo trimestre
+  adicionaNotas()
+  limpaTela()
+
+  tabelaAlunos()
+  limpaTela()
+
+  tabelaAlunosRecuperacao()
+  limpaTela()
+
+  adicionaNotasRecuperacao()
+  limpaTela()
+
+  tabelaNotaFinal()
+  
 main()
