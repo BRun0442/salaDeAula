@@ -77,7 +77,6 @@ def adicionaNotasRecuperacao():
   notasAluno.insert(len(notasAluno), notasRecuperacao)
   print(notasAluno)
 
-
 def tabelaNotaFinal():
   print('\n╔══════════════════════════════════════════════════════════════════════════════════╗')
   print("| Nome | Nota 1º trimestre | Nota 2º trimestre | Nota Recuperação | Média das notas |")
