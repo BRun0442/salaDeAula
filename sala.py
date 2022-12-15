@@ -52,7 +52,6 @@ def tabelaAlunosRecuperacao():
   print('\n╔══════════════╗')
   print("| Nome | Média |")
   
-
   for i in reversed(range(int(quantidadeAlunos))):
     mediaNotaAluno = (int(notasAluno[1][i]) + int(notasAluno[2][i]))/2
 
